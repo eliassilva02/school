@@ -5,7 +5,7 @@ from tkinter import messagebox
 from screens.config import style
 import customtkinter as cttk
 
-class FrmAlunos(tk.Frame):
+class FrmDisciplina(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
         self.parent = parent
@@ -14,19 +14,16 @@ class FrmAlunos(tk.Frame):
     def construir_forms(self):
         self.titulo()
         self.config(bg=style["COLOR_CORPO_PRINCIPAL"])
-        self.build_matricula()
         self.build_nome()
+        self.build_semestre()
+        self.build_ano()
         self.build_button()
-
-    def cadastrar_aluno(self):
-        print('seu merdinha')
-    
+        
     def titulo(self):
         self.barra_superior = tk.Frame(self.parent, bg=style["COLOR_CORPO_PRINCIPAL"])
         self.barra_superior.pack(side=tk.TOP, fill=tk.BOTH, expand=False)
 
-        # Primer Label con texto
-        self.labelTitulo = tk.Label(self.barra_superior, text="Cadastro de Alunos")
+        self.labelTitulo = tk.Label(self.barra_superior, text="Cadastro de Disciplinas")
         self.labelTitulo.config(fg="#222d33", font=("Montserrat", 30), bg=style["COLOR_CORPO_PRINCIPAL"])
         self.labelTitulo.pack(side=tk.TOP, fill='both', expand=True)
 
@@ -41,49 +38,69 @@ class FrmAlunos(tk.Frame):
 
         self.label_nome_disciplina = tk.Label(self.barra_superior_1, text="Nome: ")
         self.label_nome_disciplina.config(fg="#3f3f3f", font=("Montserrat", 15), padx=30, bg=style["COLOR_CORPO_PRINCIPAL"])
-        self.label_nome_disciplina.pack(side=tk.LEFT, fill='x', expand=False)
+        self.label_nome_disciplina.pack(side=tk.LEFT, fill='both', expand=False)
 
         self.entry_nome = cttk.CTkEntry(
             master=self.barra_superior_1,
-            placeholder_text="Digite o nome do aluno...",
+            placeholder_text="Digite o nome da disciplina...",
             fg_color=style["COLOR_CORPO_PRINCIPAL"],
             border_color=style["COLOR_BORDER"],
             corner_radius=5,
             border_width=1,
-            width=600,
+            width=500,
             height=30,
             text_color = "#3f3f3f"
         )
         self.entry_nome.pack(side=tk.LEFT, fill='both', expand=False)
 
-    def build_matricula(self):
+    def build_semestre(self):
         self.barra_superior_2 = tk.Frame(self.parent, bg=style["COLOR_CORPO_PRINCIPAL"])
         self.barra_superior_2.pack(side=tk.TOP, fill=tk.BOTH, expand=False, pady=20) 
 
-        # Primer Label con texto
-        self.labelMatricula = tk.Label(self.barra_superior_2, text="Matrícula: ")
-        self.labelMatricula.config(fg="#3f3f3f", font=("Montserrat", 15), padx=15, bg=style["COLOR_CORPO_PRINCIPAL"])
-        self.labelMatricula.pack(side=tk.LEFT, fill='both', expand=False)
+        self.label_semetre = tk.Label(self.barra_superior_2, text="Semestre: ")
+        self.label_semetre.config(fg="#3f3f3f", font=("Montserrat", 15), padx=15, bg=style["COLOR_CORPO_PRINCIPAL"])
+        self.label_semetre.pack(side=tk.LEFT, fill='both', expand=False)
 
-        self.entry_matricula = cttk.CTkEntry(
+        self.entry_semestre = cttk.CTkEntry(
             master=self.barra_superior_2,
-            placeholder_text="Digite a matrícula do aluno...",
+            placeholder_text="Digite o semestre...",
             fg_color=style["COLOR_CORPO_PRINCIPAL"],
             border_color=style["COLOR_BORDER"],
             corner_radius=5,
             border_width=1,
-            width=600,
+            width=150,
             height=30,
             text_color = "#3f3f3f"
         ) 
-        self.entry_matricula.pack(side=tk.LEFT, fill='both', expand=False)
+        self.entry_semestre.pack(side=tk.LEFT, fill='both', expand=False)
+
+    def build_ano(self):
+        self.barra_inferior = tk.Frame(self.parent, bg=style["COLOR_CORPO_PRINCIPAL"])
+        self.barra_inferior.pack(side=tk.TOP, fill=tk.BOTH, expand=False) 
+
+        self.label_ano = tk.Label(self.barra_inferior, text="Ano: ")
+        self.label_ano.config(fg="#3f3f3f", font=("Montserrat", 15), padx=40, bg=style["COLOR_CORPO_PRINCIPAL"])
+        self.label_ano.pack(side=tk.LEFT, fill='both', expand=False)
+
+        self.entry_ano = cttk.CTkEntry(
+            master=self.barra_inferior,
+            placeholder_text="Digite o ano...",
+            fg_color=style["COLOR_CORPO_PRINCIPAL"],
+            border_color=style["COLOR_BORDER"],
+            corner_radius=5,
+            border_width=1,
+            width=150,
+            height=30,
+            text_color = "#3f3f3f"
+        ) 
+        self.entry_ano.pack(side=tk.LEFT, fill='both', expand=False)
 
     def build_button(self):
-        self.barra_inferior = tk.Frame(self.parent, bg=style["COLOR_CORPO_PRINCIPAL"])
-        self.barra_inferior.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=False)
+        self.barra_inferior_2 = tk.Frame(self.parent, bg=style["COLOR_CORPO_PRINCIPAL"])
+        self.barra_inferior_2.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=False)
 
         self.button = cttk.CTkButton(
-            master=self.barra_inferior,
+            master=self.barra_inferior_2,
             width=150,
             height=42,
             border_width=0,

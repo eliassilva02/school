@@ -2,7 +2,8 @@ import tkinter as tk
 from tkinter import font
 from screens.config import style
 import screens.util as util
-from screens.graficos import FrmAlunos
+from screens.frm_alunos import FrmAlunos
+from screens.frm_disciplinas import FrmDisciplina
 
 class FrmMenu(tk.Tk):
     def __init__(self):
@@ -61,7 +62,7 @@ class FrmMenu(tk.Tk):
 
         buttons_info = [
             ("Alunos", "\uf109", self.buttonAlunos,self.abrir_cad_alunos),
-            ("Disciplinas", "\uf129", self.buttonBoletim,self.abrir_painel_info),
+            ("Disciplinas", "\uf129", self.buttonBoletim,self.abrir_cad_disciplina),
             ("Boletim", "\uf007", self.buttonDisciplinas,self.abrir_painel_en_construccion),
             ("Provas", "\uf03e", self.buttonProvas,self.abrir_painel_en_construccion),    
         ]
@@ -99,7 +100,18 @@ class FrmMenu(tk.Tk):
     def abrir_cad_alunos(self):   
         self.limpar_painel(self.body)     
         alunos = FrmAlunos(self.body)
-        alunos.pack()                 
+        alunos.pack()
+
+    def abrir_cad_disciplina(self):
+        self.limpar_painel(self.body)
+        disciplina = FrmDisciplina(self.body)
+        disciplina.pack()
+    
+    def abrir_painel_info(self):           
+        print('chama')
+
+    def abrir_painel_en_construccion(self):
+        print('array')
 
     def limpar_painel(self,painel):
         for widget in painel.winfo_children():
