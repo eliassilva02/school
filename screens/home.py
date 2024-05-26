@@ -5,6 +5,7 @@ import screens.util as util
 from screens.frm_alunos import FrmAlunos
 from screens.frm_disciplinas import FrmDisciplina
 from screens.frm_notas import FrmNotas
+from screens.frm_boletim import FrmBoletim
 
 class FrmMenu(tk.Tk):
     def __init__(self):
@@ -65,7 +66,7 @@ class FrmMenu(tk.Tk):
             ("Disciplinas", "\uf129", self.buttonBoletim,self.abrir_cad_disciplina),
             ("Alunos", "\uf109", self.buttonAlunos,self.abrir_cad_alunos),
             ("Provas", "\uf03e", self.buttonProvas,self.abrir_cad_notas),
-            ("Boletim", "\uf007", self.buttonDisciplinas,self.abrir_painel_en_construccion)
+            ("Boletim", "\uf007", self.buttonDisciplinas,self.abrir_cad_boletim)
         ]
 
         for text, icon, button, comando in buttons_info:
@@ -111,6 +112,11 @@ class FrmMenu(tk.Tk):
     def abrir_cad_notas(self):
         self.limpar_painel(self.body)
         notas = FrmNotas(self.body)
+        notas.pack()
+
+    def abrir_cad_boletim(self):
+        self.limpar_painel(self.body)
+        notas = FrmBoletim(self.body)
         notas.pack()
     
     def abrir_painel_info(self):           

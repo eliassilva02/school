@@ -178,28 +178,37 @@ class FrmNotas(tk.Frame):
             text="Cadastrar",
             text_color=style["COLOR_LABEL"],
             fg_color = style["COLOR_BUTTON"],
-            command=lambda: self.cadastrar_aluno()
+            command=lambda: self.cadastrar_nota()
             )
         self.button.pack(side=tk.RIGHT, fill='both', expand=False, padx=80, pady=30)
 
-    def cadastrar_aluno(self):
-        sm = [self.entry_sm1.get(), self.entry_sm2.get()]
-        av = [self.entry_av.get(), self.entry_avs.get()]
+    def cadastrar_nota(self):
+        sm = [self.entry_sm1.get().replace(',','.'), self.entry_sm2.get().replace(',','.')]
+        av = [self.entry_av.get().replace(',','.'), self.entry_avs.get().replace(',','.')]
         aluno = self.listbox_alunos.get(ACTIVE)
         disciplina = self.listbox_disciplinas.get(ACTIVE)
         
         service = CadastroNotas()
-        retorno = service.cadastrar(sm, av, aluno, disciplina)
+        retorno = service.inserir_notas(sm, av, aluno, disciplina)
 
-        #if retorno[0] == False:
-        #    messagebox.showerror("Atencao", retorno[1])
-        #else:
-        #    messagebox.showinfo("Concluido", "Aluno cadastrado com sucesso!!")
-        #    self.entry_matricula.focus()
-        #    self.entry_matricula.delete(0, len(matricula))
-        #    self.entry_nome.delete(0, len(nome))
-        #    self.listbox.delete(0, tk.END)
-        #    self.add_items()
+        if retorno[0] == False:
+            messagebox.showerror("Atencao", retorno[1])
+        else:
+            messagebox.showinfo("Concluido", "Aluno cadastrado com sucesso!!")
+            self.entry_sm1.focus()
+            self.entry_sm1.delete(0, tk.END)
+            self.entry_sm2.delete(0, tk.END)
+            self.entry_av.delete(0, tk.END)
+            self.entry_avs.delete(0, tk.END)
+            
+            self.listbox_alunos.delete(0, tk.END)
+            self.listbox_disciplinas.delete(0, tk.END)
+
+            service = CadastrarAluno()
+            x = service.buscar_alunos()
+            self.add_items(x, self.listbox_alunos)
+            x2 = service.buscar_disciplinas()
+            self.add_items(x2, self.listbox_disciplinas)
 
     def get_disciplinas(self):
         disciplinas = []

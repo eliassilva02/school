@@ -7,3 +7,6 @@ class Nota(BaseModel):
     av: Decimal
     avs: Decimal
     nf: Decimal | None
+    aluno: str
+    disciplina: str
+    aprovado: str  = 'N'
