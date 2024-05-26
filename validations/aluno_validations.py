@@ -14,4 +14,7 @@ class AlunoValidations:
         if len(self.aluno.nome) < 2 or len(self.aluno.nome) > 80:
             return False, "Ops! Parece que o nome que voce digitou nao esta no formato correto."
 
+        if len(self.aluno.disciplinas) <= 0:
+            return False, "Ops! Voce nao selecionou nenhuma disciplina. Tente novamente!!"
+
         return True, ""

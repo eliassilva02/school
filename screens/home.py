@@ -4,6 +4,7 @@ from screens.config import style
 import screens.util as util
 from screens.frm_alunos import FrmAlunos
 from screens.frm_disciplinas import FrmDisciplina
+from screens.frm_notas import FrmNotas
 
 class FrmMenu(tk.Tk):
     def __init__(self):
@@ -38,14 +39,14 @@ class FrmMenu(tk.Tk):
     def controles_barra_superior(self):
         font_awesome = font.Font(family='FontAwesome', size=12)
 
-        self.labelTitulo = tk.Label(self.barra_superior, text="Autodidacta")
+        self.labelTitulo = tk.Label(self.barra_superior, text="EasySchool")
         self.labelTitulo.config(fg="#fff", font=("Roboto", 15), bg=style["COLOR_BARRA_SUPERIOR"], pady=10, width=16)
         self.labelTitulo.pack(side=tk.LEFT)
 
         self.buttonMenuLateral = tk.Button(self.barra_superior, text="\uf0c9", font=font_awesome, command=self.toggle_painel, bd=0, bg=style["COLOR_BARRA_SUPERIOR"], fg="white")
         self.buttonMenuLateral.pack(side=tk.LEFT)
 
-        self.labelTitulo = tk.Label(self.barra_superior, text="servicio@autodidacta.mx")
+        self.labelTitulo = tk.Label(self.barra_superior, text="easyschool@gmail.com")
         self.labelTitulo.config(fg="#fff", font=("Roboto", 10), bg=style["COLOR_BARRA_SUPERIOR"], padx=10, width=20)
         self.labelTitulo.pack(side=tk.RIGHT)
     
@@ -61,10 +62,10 @@ class FrmMenu(tk.Tk):
         self.buttonSettings = tk.Button(self.menu_lateral)
 
         buttons_info = [
-            ("Alunos", "\uf109", self.buttonAlunos,self.abrir_cad_alunos),
             ("Disciplinas", "\uf129", self.buttonBoletim,self.abrir_cad_disciplina),
-            ("Boletim", "\uf007", self.buttonDisciplinas,self.abrir_painel_en_construccion),
-            ("Provas", "\uf03e", self.buttonProvas,self.abrir_painel_en_construccion),    
+            ("Alunos", "\uf109", self.buttonAlunos,self.abrir_cad_alunos),
+            ("Provas", "\uf03e", self.buttonProvas,self.abrir_cad_notas),
+            ("Boletim", "\uf007", self.buttonDisciplinas,self.abrir_painel_en_construccion)
         ]
 
         for text, icon, button, comando in buttons_info:
@@ -106,6 +107,11 @@ class FrmMenu(tk.Tk):
         self.limpar_painel(self.body)
         disciplina = FrmDisciplina(self.body)
         disciplina.pack()
+
+    def abrir_cad_notas(self):
+        self.limpar_painel(self.body)
+        notas = FrmNotas(self.body)
+        notas.pack()
     
     def abrir_painel_info(self):           
         print('chama')

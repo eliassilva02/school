@@ -1,5 +1,6 @@
 from operator import imod
 import tkinter as tk
+from services.cad_disciplinas import CadastrarDisciplina
 from services.cad_aluno import CadastrarAluno
 from tkinter import messagebox
 from screens.config import style
@@ -108,19 +109,23 @@ class FrmDisciplina(tk.Frame):
             text="Cadastrar",
             text_color=style["COLOR_LABEL"],
             fg_color = style["COLOR_BUTTON"],
-            command=lambda: self.cadastrar_aluno()
+            command=lambda: self.cadastrar_disciplina()
             )
         self.button.pack(side=tk.RIGHT, fill='both', expand=False, padx=80, pady=90)
 
-    def cadastrar_aluno(self):
-        matricula = self.entry_matricula.get()
+    def cadastrar_disciplina(self):
         nome = self.entry_nome.get()
-        service = CadastrarAluno()
-        retorno = service.cadastrar(matricula, nome)
+        semestre = self.entry_semestre.get()
+        ano = self.entry_ano.get()
+        
+        service = CadastrarDisciplina()
+        retorno = service.cadastrar(nome, ano, semestre)
 
         if retorno[0] == False:
             messagebox.showerror("Atenção", retorno[1])
         else:
-            messagebox.showinfo("Concluído", "Aluno cadastrado com sucesso!!")
-            self.entry_matricula.delete(0, len(matricula))
+            messagebox.showinfo("Concluído", "Disciplina cadastrada com sucesso!!")
+            self.entry_semestre.delete(0, len(semestre))
+            self.entry_nome.focus()
+            self.entry_ano.delete(0, len(ano))
             self.entry_nome.delete(0, len(nome))

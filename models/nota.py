@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from decimal import Decimal
 
-class Prova(BaseModel):
+class Nota(BaseModel):
     sm1: Decimal
     sm2: Decimal
     av: Decimal

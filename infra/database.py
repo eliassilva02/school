@@ -7,11 +7,11 @@ class DB:
 
     def open_connection(self):
         self.conn = pg.connect(
-            dbname = '',
-            port='',
-            password = '',
-            host = '',
-            user = ''
+            dbname = 'school',
+            port='5433',
+            password = 'pgimendes',
+            host = 'localhost',
+            user = 'postgres'
         )
 
         self.cur = self.conn.cursor()
